@@ -1,7 +1,6 @@
 import csv
 import re
 import os
-import datetime
 from datetime import date, datetime
 import time
 
@@ -28,14 +27,17 @@ def main_menu():
             print('Please Enter [A] for Add entry, [S] for Search entry or [Q] to Quit program')
             continue
 
+
 def setup():
     with open('work_log.csv', 'a') as csvfile:
         fieldnames = ['ID', 'date', 'taskname', 'timespent', 'detail']
         entry_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         entry_writer.writeheader()
         
+        
 def clear():
     print('\033c', end='')
+
 
 def id_generator():
     max_ID = 0
@@ -44,9 +46,8 @@ def id_generator():
         for row in reader:
             max_ID += 1
     return max_ID
-            
-        
 
+            
 def add_entry():
     clear()
     print('--- ADD ENTRY ---')
@@ -68,7 +69,7 @@ def add_entry():
         entry_writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         entry_writer.writerow({
             'ID': id_generator(),
-            'date': datetime.date.today().strftime('%Y%m%d'),
+            'date': date.today().strftime('%Y%m%d'),
             'taskname': taskname,
             'timespent': timespent,
             'detail': detail
@@ -77,8 +78,8 @@ def add_entry():
     print('SUCCESSFULLY ADD NEW ENTRY')
     time.sleep(1.5)
 
-def search_menu():
-    
+
+def search_menu():    
     
     valid_answer = False
     
@@ -181,8 +182,6 @@ def search_pattern():
     else:
         display_entry(navigate_list)
         
-            
-
 
 def search_date():
 
@@ -220,6 +219,7 @@ def search_date():
         clear()
     else:
         display_entry(navigate_list)
+
 
 def search_minute():
 
@@ -292,21 +292,7 @@ def display_entry(navigate_list):
             navigate = False
             clear()
             
-            
-            
-        
-        
-        
 
-    
-            
-                            
-                            
-
-#Main program
-
-
-            
 fieldnames = ['ID', 'date', 'taskname', 'timespent', 'detail']
 
 if os.path.isfile('work_log.csv') == False:
@@ -332,6 +318,7 @@ while True:
         
     
     
+
 
 
 
